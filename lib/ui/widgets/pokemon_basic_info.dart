@@ -15,6 +15,7 @@ class PokemonBasicInfo extends StatelessWidget {
         horizontal: AppTheme.padding,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             pokemon.name,

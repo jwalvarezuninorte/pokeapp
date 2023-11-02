@@ -19,6 +19,8 @@ const Widget verticalSpaceMedium = SizedBox(height: _mediumSize);
 const Widget verticalSpaceLarge = SizedBox(height: _largeSize);
 const Widget verticalSpaceMassive = SizedBox(height: _massiveSize);
 
+const Duration animationDuration = Duration(milliseconds: 300);
+
 Widget spacedDivider = const Column(
   children: <Widget>[
     verticalSpaceMedium,
@@ -30,6 +32,7 @@ Widget spacedDivider = const Column(
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 double screenHeightFraction(BuildContext context,
@@ -51,6 +54,7 @@ double quarterScreenWidth(BuildContext context) =>
 
 double getResponsiveHorizontalSpaceMedium(BuildContext context) =>
     screenWidthFraction(context, dividedBy: 10);
+
 double getResponsiveSmallFontSize(BuildContext context) =>
     getResponsiveFontSize(context, fontSize: 14, max: 15);
 

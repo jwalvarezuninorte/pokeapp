@@ -46,9 +46,12 @@ class PokeCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppTheme.radius),
                   color: Colors.grey[200],
                 ),
-                child: SvgPicture.network(
-                  pokemon.imgUrl,
-                  width: 120,
+                child: Hero(
+                  tag: pokemon.id,
+                  child: SvgPicture.network(
+                    pokemon.imgUrl,
+                    width: 120,
+                  ),
                 ),
               ),
               horizontalSpaceMedium,

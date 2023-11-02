@@ -1,5 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:pokeapp/models/simple_pokemon.dart';
+import 'package:pokeapp/ui/common/ui_helpers.dart';
 import 'package:pokeapp/ui/widgets/widgets.dart';
 import 'package:pokeapp/utils/screen_helper.dart';
 import 'package:stacked/stacked.dart';
@@ -38,13 +40,16 @@ class HomeView extends StackedView<HomeViewModel> {
               ? const SizedBox()
               : Expanded(
                   flex: 2,
-                  child: CustomDrawer(
-                    backgroundColor: Colors.grey.shade200,
-                    filters: viewModel.filters,
-                    onChanged: viewModel.onFilterChanged,
-                    onClearFilters: viewModel.clearFilters,
-                    onApplyFilters: viewModel.getFilteredPokemons,
-                    filterCount: viewModel.getTotalFilters(),
+                  child: FadeInLeft(
+                    duration: animationDuration,
+                    child: CustomDrawer(
+                      backgroundColor: Colors.grey.shade200,
+                      filters: viewModel.filters,
+                      onChanged: viewModel.onFilterChanged,
+                      onClearFilters: viewModel.clearFilters,
+                      onApplyFilters: viewModel.getFilteredPokemons,
+                      filterCount: viewModel.getTotalFilters(),
+                    ),
                   ),
                 ),
           Expanded(
@@ -53,23 +58,27 @@ class HomeView extends StackedView<HomeViewModel> {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : Stack(
-                    children: [
-                      if (pokemons.isNotEmpty && filteredPokemons.isEmpty)
-                        GridViewBuilder(
-                          crossAxisCount: display.getCrossAxisCount(context),
-                          pokemons: pokemons,
-                          onCardPressed: viewModel.navigateToPokemonDetail,
-                          isPaginated: viewModel.searchController.text.isEmpty,
-                          onPaginated: viewModel.getPokemons,
-                        ),
-                      if (filteredPokemons.isNotEmpty)
-                        GridViewBuilder(
-                          crossAxisCount: display.getCrossAxisCount(context),
-                          pokemons: filteredPokemons,
-                          onCardPressed: viewModel.navigateToPokemonDetail,
-                        ),
-                    ],
+                : FadeInUp(
+                    duration: animationDuration,
+                    child: Stack(
+                      children: [
+                        if (pokemons.isNotEmpty && filteredPokemons.isEmpty)
+                          GridViewBuilder(
+                            crossAxisCount: display.getCrossAxisCount(context),
+                            pokemons: pokemons,
+                            onCardPressed: viewModel.navigateToPokemonDetail,
+                            isPaginated:
+                                viewModel.searchController.text.isEmpty,
+                            onPaginated: viewModel.getPokemons,
+                          ),
+                        if (filteredPokemons.isNotEmpty)
+                          GridViewBuilder(
+                            crossAxisCount: display.getCrossAxisCount(context),
+                            pokemons: filteredPokemons,
+                            onCardPressed: viewModel.navigateToPokemonDetail,
+                          ),
+                      ],
+                    ),
                   ),
           ),
         ],
