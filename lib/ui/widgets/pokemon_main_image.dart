@@ -4,9 +4,10 @@ import 'package:pokeapp/utils/app_theme.dart';
 import 'package:pokeapp/utils/screen_helper.dart';
 
 class PokemonMainImage extends StatelessWidget {
-  const PokemonMainImage({super.key, this.imageUrl});
+  const PokemonMainImage({super.key, this.imageUrl, required this.pokemonId});
 
   final String? imageUrl;
+  final int pokemonId;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,10 @@ class PokemonMainImage extends StatelessWidget {
                 width: 120,
                 height: 120,
               )
-            : SvgPicture.network(imageUrl as String),
+            : Hero(
+                tag: pokemonId,
+                child: SvgPicture.network(imageUrl as String),
+              ),
       ),
     );
   }

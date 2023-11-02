@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:pokeapp/models/pokemon.dart';
 import 'package:pokeapp/ui/common/ui_helpers.dart';
@@ -68,7 +69,13 @@ class PokemonDetailView extends StackedView<PokemonDetailViewModel> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       verticalSpaceMedium,
-                      PokemonMainImage(imageUrl: imageUrl),
+                      FadeIn(
+                        duration: animationDuration * 3,
+                        child: PokemonMainImage(
+                          imageUrl: imageUrl,
+                          pokemonId: pokemon.id as int,
+                        ),
+                      ),
                       ImageCarousel(images: images),
                       verticalSpaceMedium,
                       PokemonBasicInfo(pokemon: pokemon),
@@ -77,7 +84,10 @@ class PokemonDetailView extends StackedView<PokemonDetailViewModel> {
                     ],
                   ),
                 ),
-                PokemonStats(stats: pokemon.stats),
+                FadeInRight(
+                  duration: animationDuration,
+                  child: PokemonStats(stats: pokemon.stats),
+                ),
               ],
             );
           }

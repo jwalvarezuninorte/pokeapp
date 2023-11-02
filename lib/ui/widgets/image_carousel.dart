@@ -1,4 +1,6 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:pokeapp/ui/common/ui_helpers.dart';
 import 'package:pokeapp/utils/app_theme.dart';
 
 class ImageCarousel extends StatelessWidget {
@@ -17,23 +19,26 @@ class ImageCarousel extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: AppTheme.padding,
         ),
-        itemBuilder: (context, index) => Container(
-          padding: const EdgeInsets.all(AppTheme.padding / 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppTheme.radius),
-            color: Colors.grey[200],
-          ),
-          child: FadeInImage.assetNetwork(
-            placeholder: 'assets/images/pokeball.png',
-            imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-              'assets/images/pokeball.png',
+        itemBuilder: (context, index) => FadeInUp(
+          duration: animationDuration * (index + 1),
+          child: Container(
+            padding: const EdgeInsets.all(AppTheme.padding / 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppTheme.radius),
+              color: Colors.grey[200],
+            ),
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/images/pokeball.png',
+              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                'assets/images/pokeball.png',
+                width: 120,
+                height: 120,
+              ),
+              image: images[index],
+              fit: BoxFit.cover,
               width: 120,
               height: 120,
             ),
-            image: images[index],
-            fit: BoxFit.cover,
-            width: 120,
-            height: 120,
           ),
         ),
         separatorBuilder: (context, index) => const SizedBox(
